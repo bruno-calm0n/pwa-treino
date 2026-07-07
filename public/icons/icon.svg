@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Treino Diário">
+  <rect width="512" height="512" rx="96" fill="#2563eb" />
+  <rect x="92" y="234" width="328" height="44" rx="22" fill="#ffffff" />
+  <rect x="72" y="194" width="48" height="124" rx="18" fill="#facc15" />
+  <rect x="392" y="194" width="48" height="124" rx="18" fill="#facc15" />
+  <rect x="132" y="214" width="40" height="84" rx="16" fill="#dbeafe" />
+  <rect x="340" y="214" width="40" height="84" rx="16" fill="#dbeafe" />
+  <path d="M176 362h160" stroke="#ffffff" stroke-width="34" stroke-linecap="round" />
+  <path d="M208 150h96" stroke="#ffffff" stroke-width="34" stroke-linecap="round" />
+</svg>
