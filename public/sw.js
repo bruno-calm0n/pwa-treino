@@ -1,4 +1,4 @@
-const CACHE_NAME = "treino-diario-v9";
+const CACHE_NAME = "treino-diario-v10";
 const SCOPE_URL = self.registration.scope;
 const SCOPE_PATH = new URL(SCOPE_URL).pathname;
 const createScopedUrl = (path) => new URL(path, SCOPE_URL).toString();
@@ -79,6 +79,28 @@ const getCachedOrNetworkResponse = async (request) => {
   }
 };
 
+const getNavigationResponse = async (request) => {
+  const cache = await caches.open(CACHE_NAME);
+
+  try {
+    const networkResponse = await fetch(request);
+
+    if (networkResponse && networkResponse.ok) {
+      await cache.put(createScopedUrl("index.html"), networkResponse.clone());
+    }
+
+    return networkResponse;
+  } catch (error) {
+    const fallbackResponse = await caches.match(createScopedUrl("index.html"));
+
+    if (fallbackResponse) {
+      return fallbackResponse;
+    }
+
+    throw error;
+  }
+};
+
 self.addEventListener("install", (event) => {
   event.waitUntil(cacheAppShell().then(() => self.skipWaiting()));
 });
@@ -100,6 +122,11 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") {
+    return;
+  }
+
+  if (event.request.mode === "navigate") {
+    event.respondWith(getNavigationResponse(event.request));
     return;
   }
 
