@@ -34,7 +34,7 @@ npm run dev
 Depois abra a URL exibida no terminal, normalmente:
 
 ```text
-http://localhost:5173/
+http://localhost:5173/pwa-treino/
 ```
 
 ## Como testar como PWA
@@ -49,8 +49,34 @@ npm run preview
 Depois abra:
 
 ```text
-http://localhost:4173/
+http://localhost:4173/pwa-treino/
 ```
+
+## Deploy no GitHub Pages
+
+O projeto já está configurado para publicar em:
+
+```text
+https://seu-usuario.github.io/pwa-treino/
+```
+
+Antes do primeiro deploy, no GitHub, acesse:
+
+```text
+Settings > Pages > Build and deployment > Source > GitHub Actions
+```
+
+Depois envie o projeto para a branch `main`:
+
+```bash
+git add .
+git commit -m "configura deploy no GitHub Pages"
+git push origin main
+```
+
+O deploy será executado automaticamente pelo workflow em `.github/workflows/deploy.yml`.
+
+Se o nome do repositório não for `pwa-treino`, ajuste o `base` em `vite.config.ts`.
 
 ## Scripts disponíveis
 

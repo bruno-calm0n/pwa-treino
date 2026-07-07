@@ -1,27 +1,31 @@
-const CACHE_NAME = "treino-diario-v3";
+const CACHE_NAME = "treino-diario-v4";
+const SCOPE_URL = self.registration.scope;
+const SCOPE_PATH = new URL(SCOPE_URL).pathname;
+const createScopedUrl = (path) => new URL(path, SCOPE_URL).toString();
 const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/icons/icon.svg",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
-  "/icons/maskable-icon.svg",
-];
+  "",
+  "index.html",
+  "manifest.json",
+  "icons/icon.svg",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
+  "icons/maskable-icon.svg",
+].map(createScopedUrl);
 
 const cacheViteAssets = async (cache) => {
-  const indexResponse = await fetch("/index.html", { cache: "reload" });
+  const indexUrl = createScopedUrl("index.html");
+  const indexResponse = await fetch(indexUrl, { cache: "reload" });
 
   if (!indexResponse.ok) {
     return;
   }
 
-  await cache.put("/index.html", indexResponse.clone());
+  await cache.put(indexUrl, indexResponse.clone());
 
   const indexHtml = await indexResponse.text();
   const assetMatches = indexHtml.matchAll(/(?:href|src)="([^"]*\/assets\/[^"]+)"/g);
   const assetUrls = [...assetMatches].map((match) => {
-    return new URL(match[1], self.location.origin).pathname;
+    return new URL(match[1], SCOPE_URL).toString();
   });
 
   await cache.addAll([...new Set(assetUrls)]);
@@ -35,8 +39,11 @@ const cacheAppShell = async () => {
 };
 
 const shouldCacheResponse = (request, response) => {
+  const requestUrl = new URL(request.url);
+
   return (
-    new URL(request.url).origin === self.location.origin &&
+    requestUrl.origin === self.location.origin &&
+    requestUrl.pathname.startsWith(SCOPE_PATH) &&
     response &&
     response.status === 200 &&
     response.type === "basic"
@@ -61,7 +68,7 @@ const getCachedOrNetworkResponse = async (request) => {
     return networkResponse;
   } catch (error) {
     if (request.mode === "navigate") {
-      const fallbackResponse = await caches.match("/index.html");
+      const fallbackResponse = await caches.match(createScopedUrl("index.html"));
 
       if (fallbackResponse) {
         return fallbackResponse;

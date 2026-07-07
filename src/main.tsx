@@ -11,8 +11,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js").catch((error) => {
-      console.error("Falha ao registrar o service worker:", error);
-    });
+    navigator.serviceWorker
+      .register(`${import.meta.env.BASE_URL}sw.js`, {
+        scope: import.meta.env.BASE_URL,
+      })
+      .catch((error) => {
+        console.error("Falha ao registrar o service worker:", error);
+      });
   });
 }
