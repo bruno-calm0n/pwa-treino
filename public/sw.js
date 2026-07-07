@@ -1,4 +1,4 @@
-const CACHE_NAME = "treino-diario-v4";
+const CACHE_NAME = "treino-diario-v9";
 const SCOPE_URL = self.registration.scope;
 const SCOPE_PATH = new URL(SCOPE_URL).pathname;
 const createScopedUrl = (path) => new URL(path, SCOPE_URL).toString();

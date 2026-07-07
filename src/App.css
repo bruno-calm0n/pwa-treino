@@ -20,6 +20,9 @@
   --reset-bg: #fff5f5;
   --reset-bg-hover: #ffe7e7;
   --reset-border: #d64545;
+  --success: #15803d;
+  --error: #b42323;
+  --input-bg: #ffffff;
   color: var(--text);
   background: var(--page-bg);
   font-family:
@@ -29,29 +32,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-:root[data-theme="dark"] {
-  --page-bg: #0f172a;
-  --text: #e5e7eb;
-  --heading: #f8fafc;
-  --muted: #a8b3c7;
-  --accent: #60a5fa;
-  --card-bg: #111827;
-  --card-border: #273449;
-  --focus: #fde047;
-  --action-flex: #3b82f6;
-  --action-polichinelo: #14b8a6;
-  --action-abdominal: #f97316;
-  --shadow: rgb(0 0 0 / 32%);
-  --flex-shadow: rgb(59 130 246 / 20%);
-  --polichinelo-shadow: rgb(20 184 166 / 18%);
-  --abdominal-shadow: rgb(249 115 22 / 18%);
-  --reset-text: #fecaca;
-  --reset-text-hover: #fee2e2;
-  --reset-bg: #391b1f;
-  --reset-bg-hover: #4b2025;
-  --reset-border: #7f1d1d;
 }
 
 * {
@@ -74,6 +54,12 @@ button {
   font: inherit;
 }
 
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
 .app-shell {
   width: min(100%, 720px);
   min-height: 100vh;
@@ -82,6 +68,10 @@ button {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.login-shell {
+  justify-content: flex-start;
 }
 
 .hero {
@@ -120,24 +110,116 @@ h1 {
   line-height: 1.6;
 }
 
-.theme-toggle {
-  flex: 0 0 auto;
-  padding: 10px 14px;
+.login-card {
+  width: min(100%, 420px);
+  padding: 20px;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.field input {
+  width: 100%;
+  padding: 13px 14px;
   border: 1px solid var(--card-border);
   border-radius: 8px;
   color: var(--text);
-  background: var(--card-bg);
+  background: var(--input-bg);
+  font: inherit;
+}
+
+.field input:focus-visible {
+  border-color: var(--accent);
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.form-message,
+.sync-error {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.login-button {
+  width: 100%;
+  padding: 15px 18px;
+  border-radius: 8px;
+  color: var(--action-text);
+  background: var(--accent);
   cursor: pointer;
   font-weight: 800;
   transition:
-    background 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
+    opacity 160ms ease,
     transform 160ms ease;
 }
 
-.theme-toggle:hover {
+.login-button:hover:not(:disabled) {
   transform: translateY(-1px);
+}
+
+.account-bar {
+  padding: 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.account-bar span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.account-bar strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--heading);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.sync-info {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sync-info span {
+  color: var(--success);
+}
+
+.sync-info button {
+  padding: 9px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--page-bg);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.sync-info button:hover {
   border-color: var(--accent);
 }
 
@@ -192,7 +274,8 @@ h1 {
 }
 
 .action-button:focus-visible,
-.theme-toggle:focus-visible,
+.login-button:focus-visible,
+.sync-info button:focus-visible,
 .reset-button:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
@@ -227,24 +310,22 @@ h1 {
 }
 
 .reset-button {
-  width: 100%;
-  padding: 16px 18px;
-  border: 1px solid var(--reset-border);
-  border-radius: 8px;
+  width: fit-content;
+  padding: 0;
+  border: 0;
   color: var(--reset-text);
-  background: var(--reset-bg);
+  background: transparent;
   cursor: pointer;
   font-weight: 800;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 4px;
   transition:
-    background 160ms ease,
-    border-color 160ms ease,
     color 160ms ease;
 }
 
 .reset-button:hover {
-  border-color: var(--reset-text);
   color: var(--reset-text-hover);
-  background: var(--reset-bg-hover);
 }
 
 @media (max-width: 640px) {
@@ -261,7 +342,17 @@ h1 {
     flex-direction: column;
   }
 
-  .theme-toggle {
+  .login-card {
+    width: 100%;
+  }
+
+  .account-bar,
+  .sync-info {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .sync-info button {
     width: 100%;
   }
 
