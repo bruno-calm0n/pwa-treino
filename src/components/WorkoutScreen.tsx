@@ -25,8 +25,8 @@ function WorkoutScreen({
   return (
     <main className="app-shell">
       <AppHeader
-        title="Registre seus exercícios"
-        subtitle="Os totais ficam salvos no dispositivo e continuam disponíveis mesmo ao fechar o app."
+        title="Registro de exercícios"
+        // subtitle="Os totais ficam salvos no dispositivo e continuam disponíveis mesmo ao fechar o app."
       />
 
       {/* <section className="account-bar" aria-label="Conta conectada">
