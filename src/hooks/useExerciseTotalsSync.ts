@@ -144,6 +144,15 @@ export const useExerciseTotalsSync = (session: Session | null) => {
     });
   };
 
+  const removeExercise = (exercise: ExerciseKey, increment: number) => {
+    setTotals((currentTotals) => {
+      return {
+        ...currentTotals,
+        [exercise]: Math.max(0, currentTotals[exercise] - increment),
+      };
+    });
+  };
+
   const resetDay = () => {
     const shouldReset = window.confirm(
       "Tem certeza que deseja zerar os contadores do dia?",
@@ -174,6 +183,7 @@ export const useExerciseTotalsSync = (session: Session | null) => {
   return {
     addExercise,
     isSyncLoading,
+    removeExercise,
     resetDay,
     syncError,
     syncLabel,

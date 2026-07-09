@@ -7,6 +7,7 @@ export type SyncStatus = "idle" | "loading" | "saving" | "saved" | "error";
 export type ExerciseConfig = {
   key: ExerciseKey;
   actionLabel: string;
+  removeLabel: string;
   totalLabel: string;
   increment: number;
 };
