@@ -4,7 +4,7 @@ import { useExerciseTotalsSync } from "./hooks/useExerciseTotalsSync";
 import { useSupabaseAuth } from "./hooks/useSupabaseAuth";
 import { isSupabaseConfigured } from "./lib/supabase";
 
-//trigger deploy teste
+//trigger deploy teste parte 2s
 
 const SUPABASE_CONFIG_ERROR =
   "Configure VITE_SUPABASE_URL e VITE_SUPABASE_PUBLISHABLE_KEY no .env.local.";
