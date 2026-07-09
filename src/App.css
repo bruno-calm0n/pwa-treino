@@ -1,24 +1,25 @@
 :root {
-  --page-bg: #f4f7fb;
-  --text: #172033;
-  --heading: #101827;
-  --muted: #526173;
-  --accent: #2563eb;
-  --card-bg: #ffffff;
-  --card-border: #d8e0ea;
-  --focus: #facc15;
-  --action-flex: #2563eb;
-  --action-text: #ffffff;
-  --shadow: rgb(16 24 39 / 18%);
-  --flex-shadow: rgb(37 99 235 / 16%);
-  --reset-text: #b42323;
-  --reset-text-hover: #8f1d1d;
-  --reset-bg: #fff5f5;
-  --reset-bg-hover: #ffe7e7;
-  --reset-border: #d64545;
-  --success: #15803d;
-  --error: #b42323;
-  --input-bg: #ffffff;
+  --page-bg: #272822;
+  --text: #f8f8f2;
+  --heading: #f8f8f2;
+  --muted: #cfcfbd;
+  --accent: #a6e22e;
+  --card-bg: #34352f;
+  --card-border: #555449;
+  --focus: #fd971f;
+  --action-flex: #66d9ef;
+  --action-text: #272822;
+  --shadow: rgb(0 0 0 / 34%);
+  --flex-shadow: rgb(102 217 239 / 18%);
+  --reset-text: #f92672;
+  --reset-text-hover: #ff5c8a;
+  --reset-bg: #3a2330;
+  --reset-bg-hover: #4b2638;
+  --reset-border: #f92672;
+  --success: #a6e22e;
+  --error: #f92672;
+  --input-bg: #1f201b;
+  color-scheme: dark;
   color: var(--text);
   background: var(--page-bg);
   font-family:
@@ -136,6 +137,11 @@ h1 {
   font: inherit;
 }
 
+.field input::placeholder {
+  color: #8f8d80;
+  opacity: 1;
+}
+
 .field input:focus-visible {
   border-color: var(--accent);
   outline: 3px solid var(--focus);
@@ -155,7 +161,7 @@ h1 {
   width: 100%;
   padding: 15px 18px;
   border-radius: 8px;
-  color: var(--action-text);
+  color: var(--page-bg);
   background: var(--accent);
   cursor: pointer;
   font-weight: 800;
@@ -210,7 +216,7 @@ h1 {
   border: 1px solid var(--card-border);
   border-radius: 8px;
   color: var(--text);
-  background: var(--page-bg);
+  background: var(--input-bg);
   cursor: pointer;
   font-weight: 800;
 }
@@ -239,6 +245,7 @@ h1 {
 .exercise-name-button {
   min-height: 52px;
   padding: 0 16px;
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   color: var(--heading);
   background: var(--page-bg);
