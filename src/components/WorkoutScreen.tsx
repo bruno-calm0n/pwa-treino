@@ -76,7 +76,7 @@ function WorkoutScreen({
         disabled={isSyncLoading}
         onClick={onResetDay}
       >
-        Resetar dia
+        Resetar
       </button>
     </main>
   );

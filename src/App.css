@@ -8,13 +8,9 @@
   --card-border: #d8e0ea;
   --focus: #facc15;
   --action-flex: #2563eb;
-  --action-polichinelo: #0f766e;
-  --action-abdominal: #c2410c;
   --action-text: #ffffff;
   --shadow: rgb(16 24 39 / 18%);
   --flex-shadow: rgb(37 99 235 / 16%);
-  --polichinelo-shadow: rgb(15 118 110 / 16%);
-  --abdominal-shadow: rgb(194 65 12 / 16%);
   --reset-text: #b42323;
   --reset-text-hover: #8f1d1d;
   --reset-bg: #fff5f5;
@@ -248,16 +244,6 @@ h1 {
     background 160ms ease,
     transform 160ms ease,
     box-shadow 160ms ease;
-}
-
-.action-button:nth-child(2) {
-  background: var(--action-polichinelo);
-  box-shadow: 0 12px 24px var(--polichinelo-shadow);
-}
-
-.action-button:nth-child(3) {
-  background: var(--action-abdominal);
-  box-shadow: 0 12px 24px var(--abdominal-shadow);
 }
 
 .action-button span {
