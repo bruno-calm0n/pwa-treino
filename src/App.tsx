@@ -26,6 +26,7 @@ function App() {
   const {
     addExercise,
     isSyncLoading,
+    removeExercise,
     resetDay,
     syncError,
     syncLabel,
@@ -55,6 +56,7 @@ function App() {
       isSyncLoading={isSyncLoading}
       onAddExercise={addExercise}
       onLogout={logout}
+      onRemoveExercise={removeExercise}
       onResetDay={resetDay}
       syncError={syncError}
       syncLabel={syncLabel}

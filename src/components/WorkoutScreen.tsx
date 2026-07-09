@@ -7,6 +7,7 @@ type WorkoutScreenProps = {
   isSyncLoading: boolean;
   onAddExercise: (exercise: ExerciseKey, increment: number) => void;
   onLogout: () => void;
+  onRemoveExercise: (exercise: ExerciseKey, increment: number) => void;
   onResetDay: () => void;
   syncError: string;
   syncLabel: string;
@@ -16,6 +17,7 @@ type WorkoutScreenProps = {
 function WorkoutScreen({
   isSyncLoading,
   onAddExercise,
+  onRemoveExercise,
   onResetDay,
   syncError,
   totals,
@@ -48,16 +50,31 @@ function WorkoutScreen({
 
       <section className="actions" aria-label="Ações de treino">
         {EXERCISES.map((exercise) => (
-          <button
-            className="action-button"
-            key={exercise.key}
-            type="button"
-            disabled={isSyncLoading}
-            onClick={() => onAddExercise(exercise.key, exercise.increment)}
-          >
-            {exercise.actionLabel}
-            <span>+{exercise.increment}</span>
-          </button>
+          <article className="exercise-action" key={exercise.key}>
+            <span className="exercise-name-button">{exercise.totalLabel}</span>
+            <div className="exercise-action-buttons">
+              <button
+                className="icon-action-button"
+                type="button"
+                aria-label={`Adicionar ${exercise.totalLabel}`}
+                disabled={isSyncLoading}
+                onClick={() => onAddExercise(exercise.key, exercise.increment)}
+              >
+                +
+              </button>
+              <button
+                className="icon-action-button"
+                type="button"
+                aria-label={`Remover ${exercise.totalLabel}`}
+                disabled={isSyncLoading || totals[exercise.key] === 0}
+                onClick={() =>
+                  onRemoveExercise(exercise.key, exercise.increment)
+                }
+              >
+                -
+              </button>
+            </div>
+          </article>
         ))}
       </section>
 
