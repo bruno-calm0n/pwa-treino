@@ -236,34 +236,37 @@ h1 {
   gap: 14px;
 }
 
-.exercise-action-title {
+.exercise-name-button {
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: 8px;
   color: var(--heading);
+  background: var(--page-bg);
+  display: inline-flex;
+  align-items: center;
   font-size: 1rem;
   font-weight: 800;
 }
 
 .exercise-action-buttons {
-  width: min(100%, 390px);
+  flex: 0 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 52px);
   gap: 10px;
 }
 
-.action-button {
-  width: 100%;
-  min-height: 84px;
-  padding: 18px;
+.icon-action-button {
+  width: 52px;
+  height: 52px;
   border-radius: 8px;
   color: var(--action-text);
   background: var(--action-flex);
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
   font-weight: 800;
-  text-align: left;
   box-shadow: 0 12px 24px var(--flex-shadow);
   transition:
     background 160ms ease,
@@ -271,20 +274,16 @@ h1 {
     box-shadow 160ms ease;
 }
 
-.action-button span {
-  font-size: 1.5rem;
-}
-
-.action-button:hover {
+.icon-action-button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 16px 30px var(--shadow);
 }
 
-.action-button:active {
+.icon-action-button:active {
   transform: translateY(0);
 }
 
-.action-button:focus-visible,
+.icon-action-button:focus-visible,
 .login-button:focus-visible,
 .sync-info button:focus-visible,
 .reset-button:focus-visible {
@@ -349,12 +348,20 @@ h1 {
   }
 
   .exercise-action {
-    align-items: stretch;
-    flex-direction: column;
+    gap: 10px;
   }
 
   .exercise-action-buttons {
-    width: 100%;
+    grid-template-columns: repeat(2, 48px);
+  }
+
+  .exercise-name-button {
+    flex: 1;
+  }
+
+  .icon-action-button {
+    width: 48px;
+    height: 48px;
   }
 
   .top-bar {
@@ -373,9 +380,5 @@ h1 {
 
   .sync-info button {
     width: 100%;
-  }
-
-  .action-button {
-    min-height: 84px;
   }
 }

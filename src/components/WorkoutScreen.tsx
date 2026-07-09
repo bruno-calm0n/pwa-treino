@@ -51,27 +51,27 @@ function WorkoutScreen({
       <section className="actions" aria-label="Ações de treino">
         {EXERCISES.map((exercise) => (
           <article className="exercise-action" key={exercise.key}>
-            <span className="exercise-action-title">{exercise.totalLabel}</span>
+            <span className="exercise-name-button">{exercise.totalLabel}</span>
             <div className="exercise-action-buttons">
               <button
-                className="action-button"
+                className="icon-action-button"
                 type="button"
+                aria-label={`Adicionar ${exercise.totalLabel}`}
                 disabled={isSyncLoading}
                 onClick={() => onAddExercise(exercise.key, exercise.increment)}
               >
-                {exercise.actionLabel}
-                <span>+{exercise.increment}</span>
+                +
               </button>
               <button
-                className="action-button"
+                className="icon-action-button"
                 type="button"
+                aria-label={`Remover ${exercise.totalLabel}`}
                 disabled={isSyncLoading || totals[exercise.key] === 0}
                 onClick={() =>
                   onRemoveExercise(exercise.key, exercise.increment)
                 }
               >
-                {exercise.removeLabel}
-                <span>-{exercise.increment}</span>
+                -
               </button>
             </div>
           </article>

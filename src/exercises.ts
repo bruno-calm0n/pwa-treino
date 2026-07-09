@@ -9,22 +9,16 @@ export const INITIAL_TOTALS: ExerciseTotals = {
 export const EXERCISES: ExerciseConfig[] = [
   {
     key: "flexoes",
-    actionLabel: "Add Flexão",
-    removeLabel: "Remover Flexão",
     totalLabel: "Flexões",
     increment: 5,
   },
   {
     key: "polichinelos",
-    actionLabel: "Add Polichinelo",
-    removeLabel: "Remover Polichinelo",
     totalLabel: "Polichinelos",
     increment: 20,
   },
   {
     key: "abdominais",
-    actionLabel: "Add Abdominal",
-    removeLabel: "Remover Abdominal",
     totalLabel: "Abdominais",
     increment: 5,
   },
