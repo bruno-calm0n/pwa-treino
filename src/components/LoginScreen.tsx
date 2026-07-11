@@ -1,4 +1,5 @@
 import type { FormEvent } from "react";
+import type { AppTheme } from "../types";
 import AppHeader from "./AppHeader";
 
 type LoginScreenProps = {
@@ -12,6 +13,8 @@ type LoginScreenProps = {
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onToggleTheme: () => void;
+  theme: AppTheme;
 };
 
 function LoginScreen({
@@ -25,11 +28,18 @@ function LoginScreen({
   onEmailChange,
   onPasswordChange,
   onSubmit,
+  onToggleTheme,
+  theme,
 }: LoginScreenProps) {
   if (isLoading) {
     return (
       <main className="app-shell login-shell">
-        <AppHeader title="Entrar no app" subtitle="Carregando sessão..." />
+        <AppHeader
+          onToggleTheme={onToggleTheme}
+          theme={theme}
+          title="Entrar no app"
+          subtitle="Carregando sessão..."
+        />
       </main>
     );
   }
@@ -37,6 +47,8 @@ function LoginScreen({
   return (
     <main className="app-shell login-shell">
       <AppHeader
+        onToggleTheme={onToggleTheme}
+        theme={theme}
         title="Entrar no app"
         subtitle="Use o email e a senha criados manualmente no Supabase."
       />

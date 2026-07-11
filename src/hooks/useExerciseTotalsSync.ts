@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../lib/supabase";
-import {
-  createInitialTotals,
-  loadStoredTotals,
-  persistTotals,
-} from "../storage/exerciseTotals";
+import { loadStoredTotals, persistTotals } from "../storage/exerciseTotals";
 import type { ExerciseKey, ExerciseTotals, SyncStatus } from "../types";
 import { getErrorMessage } from "../utils/getErrorMessage";
 
@@ -153,18 +149,6 @@ export const useExerciseTotalsSync = (session: Session | null) => {
     });
   };
 
-  const resetDay = () => {
-    const shouldReset = window.confirm(
-      "Tem certeza que deseja zerar os contadores do dia?",
-    );
-
-    if (!shouldReset) {
-      return;
-    }
-
-    setTotals(createInitialTotals());
-  };
-
   const isSyncLoading = Boolean(
     session && !remoteReady && syncStatus === "loading",
   );
@@ -184,7 +168,6 @@ export const useExerciseTotalsSync = (session: Session | null) => {
     addExercise,
     isSyncLoading,
     removeExercise,
-    resetDay,
     syncError,
     syncLabel,
     totals,
