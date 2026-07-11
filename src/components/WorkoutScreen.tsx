@@ -1,5 +1,5 @@
 import { EXERCISES } from "../exercises";
-import type { ExerciseKey, ExerciseTotals } from "../types";
+import type { AppTheme, ExerciseKey, ExerciseTotals } from "../types";
 import AppHeader from "./AppHeader";
 
 type WorkoutScreenProps = {
@@ -8,9 +8,10 @@ type WorkoutScreenProps = {
   onAddExercise: (exercise: ExerciseKey, increment: number) => void;
   onLogout: () => void;
   onRemoveExercise: (exercise: ExerciseKey, increment: number) => void;
-  onResetDay: () => void;
+  onToggleTheme: () => void;
   syncError: string;
   syncLabel: string;
+  theme: AppTheme;
   totals: ExerciseTotals;
 };
 
@@ -18,14 +19,17 @@ function WorkoutScreen({
   isSyncLoading,
   onAddExercise,
   onRemoveExercise,
-  onResetDay,
+  onToggleTheme,
   syncError,
+  theme,
   totals,
 }: WorkoutScreenProps) {
   return (
     <main className="app-shell">
       <AppHeader
-        title="Registro de exercícios"
+        onToggleTheme={onToggleTheme}
+        theme={theme}
+        title="Organize seu treino de hoje."
       />
 
       {/* <section className="account-bar" aria-label="Conta conectada">
@@ -47,53 +51,52 @@ function WorkoutScreen({
         </p>
       )}
 
-      <section className="actions" aria-label="Ações de treino">
-        {EXERCISES.map((exercise) => (
-          <article className="exercise-action" key={exercise.key}>
-            <span className="exercise-name-button">{exercise.totalLabel}</span>
-            <div className="exercise-action-buttons">
-              <button
-                className="icon-action-button"
-                type="button"
-                aria-label={`Adicionar ${exercise.totalLabel}`}
-                disabled={isSyncLoading}
-                onClick={() => onAddExercise(exercise.key, exercise.increment)}
-              >
-                +
-              </button>
-              <button
-                className="icon-action-button"
-                type="button"
-                aria-label={`Remover ${exercise.totalLabel}`}
-                disabled={isSyncLoading || totals[exercise.key] === 0}
-                onClick={() =>
-                  onRemoveExercise(exercise.key, exercise.increment)
-                }
-              >
-                -
-              </button>
-            </div>
-          </article>
-        ))}
+      <section className="workout-section" aria-label="Ações de treino">
+        <div className="actions">
+          {EXERCISES.map((exercise) => (
+            <article className="exercise-action" key={exercise.key}>
+              <span className="exercise-name-button">
+                {exercise.totalLabel}
+              </span>
+              <div className="exercise-action-buttons">
+                <button
+                  className="icon-action-button"
+                  type="button"
+                  aria-label={`Adicionar ${exercise.totalLabel}`}
+                  disabled={isSyncLoading}
+                  onClick={() =>
+                    onAddExercise(exercise.key, exercise.increment)
+                  }
+                >
+                  +
+                </button>
+                <button
+                  className="icon-action-button"
+                  type="button"
+                  aria-label={`Remover ${exercise.totalLabel}`}
+                  disabled={isSyncLoading || totals[exercise.key] === 0}
+                  onClick={() =>
+                    onRemoveExercise(exercise.key, exercise.increment)
+                  }
+                >
+                  -
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="totals" aria-label="Totais acumulados">
-        {EXERCISES.map((exercise) => (
-          <article className="total-card" key={exercise.key}>
-            <span>{exercise.totalLabel}</span>
-            <strong>{totals[exercise.key]}</strong>
-          </article>
-        ))}
+      <section className="workout-section" aria-label="Contadores">
+        <div className="totals">
+          {EXERCISES.map((exercise) => (
+            <article className="total-card" key={exercise.key}>
+              <span>{exercise.totalLabel}</span>
+              <strong>{totals[exercise.key]}</strong>
+            </article>
+          ))}
+        </div>
       </section>
-
-      <button
-        className="reset-button"
-        type="button"
-        disabled={isSyncLoading}
-        onClick={onResetDay}
-      >
-        Resetar
-      </button>
     </main>
   );
 }
